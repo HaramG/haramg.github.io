@@ -18,7 +18,7 @@ var user;
   };
   firebase.initializeApp(config);
 console.log(firebase)
-if(firebase.auth().currentUser()){
+if(firebase.auth().currentUser){
   initUser();
 }else{
   firebase.auth().signInAnonymously()
@@ -203,6 +203,89 @@ body{
 }
 
 </style>
+<script>
+var notifEvents,messageEvents,fullnotif,fullmessage;
+var notifEvents = true;
+function switchTo(indice){
+  if(indice === 'no'){
+    if(notifEvents){
+      notifevents = false;
+      fullnotif = true;
+      fullmessage = false;
+      messageEvents = false;
+      displayEvents("fullnotif");
+    }else{
+      notifEvents = true;
+      fullnotif = false;
+      messageEvents = false;
+      fullmessage = false;
+      displayEvents("notifEvents");
+    }
+  }else{
+    if(messageEvents){
+      notifevents = false;
+      fullnotif = false;
+      fullmessage = true;
+      messageEvents = false;
+      displayEvents("fullmessage");
+    }else{
+      notifevents = false;
+      fullnotif = false;
+      messageEvents = true;
+      fullmessage = false;
+      displayEvents("messageEvents");
+    }
+  }
+}
+function displayFullNotif(){
+  var fullnewEvents = document.createElement('div');
+  firebase.database().ref('users/'+user.uid+'/notifications').once('value').then(function(notifs){
+    if(notif.val()){
+      profile.notifications = notif.val();
+      for(i = 0; i < profile.notifications.length; i ++){
+        var fulleventDiv = document.createElement('div');
+
+        var icon = document.createElement('img');
+        icon.setAttribute('src', profile.notifications[i]['icon']);
+        icon.classList = 'fullEventIcon'; //to css
+
+        var date = document.createElement('span');
+        date.text = dateify(profile.notifications[i]['date'])
+
+        fullEventDiv.appendChild(icon);
+        fulleventDiv.classList = 'fullEvent'; //to css
+
+        fullnewEvents.appendChild(fulleventDiv);
+      }
+    }
+  })
+  document.getElementById('eventContainer').html = newEvents;
+}
+function displayNotifEvents(){
+
+}
+function displayFullMessage(){
+
+}
+function displayMessageEvents(){
+
+}
+function dateify(timestamp){
+  var newDate = new Date().getTime();
+  var timeDifference = newDate - timestamp;
+  var inHours = timeDifference / 3 600 000;
+  var days = 0;
+  var toDisplay = '';
+  if(inHours > 24){
+    for(i = 24; i <= inHours){
+      days ++;
+      inHours -= 24
+    }
+  }
+  if(days){}else{}
+}
+dateify();
+</script>
 </head>
 <body>
 <div id="container">
@@ -230,7 +313,7 @@ body{
           <span id="notificationCount" class="countSpan">100</span>
         </div>
       </a>
-    </di    width: 100%;v>
+    </div>
     <div id="eventShow">
       <div id="controls">
         <div id="notificationControls" display="flex"></div>

@@ -1,7 +1,4 @@
 {
   "name": "Item Finder Project",
-  "author": "J and P",
-  "dependencies": {
-    "paypal"
-  }
+  "author": "J and P"
 }
