@@ -13,16 +13,20 @@
     "whatever": null
   }
   var number = 8;
-  var array = []
-  var anotherObj = {};
-  var string = "Another string for example";
-  var boolean = false;
-  var func = function(){
-
+  var array = ["12","string",198,"key":{'key':"value","key":"val"},['1','5','4']] //empty array refered simply by typing array (since the variable name is array)
+  var anotherObj = {}; //empty object refered simply by typing anotherObj (since the var name is anotherObj)
+  var string = "Another string for example"; //string containing said text refered simply by typing string (name of var is string)
+  var trueOrFalse = false; //boolean (either true or false) refered simply by typing trueOrFalse (since its named trueOrFalse)
+  var func = function(argumentz){ //functions are called (refered) by their var name. You must match the required arguments when calling it with your own values for this iteration of the callback
+    for(i = 0; i < argumentz.length; i ++){
+      console.log(argumentz[i])
+    }
   }
   var emptyvar;
   var anotherone = "Start fo the string";
   discord.func(7,'preethesh');
+  discord['func'](8, 'jay');
+  func(array);
   </script>
   <script>
   {
